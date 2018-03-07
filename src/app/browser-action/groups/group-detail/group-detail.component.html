@@ -1,0 +1,51 @@
+<form>
+  <header>
+    <mat-form-field fxFlexFill>
+      <input [(ngModel)]="group.name"
+             name="group-name"
+             matInput
+             #groupName
+             maxlength="15"
+             placeholder="Group Name">
+      <mat-hint align="start">
+        <strong>Fill in a name of group.</strong>
+      </mat-hint>
+      <mat-hint align="end">{{groupName.value.length}} / 15</mat-hint>
+    </mat-form-field>
+  </header>
+
+  <content>
+    <div fxLayout="row">
+      <mat-form-field>
+        <input [(ngModel)]="member.name"
+               name="member-name"
+               matInput
+               placeholder="Member Name">
+      </mat-form-field>
+
+      <button mat-mini-fab
+              color="primary"
+              (click)="onAddMember()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    <app-list [list]="group.members"
+              (removeItem)="onRemoveMember($event)"></app-list>
+  </content>
+
+  <footer fxLayout="row"
+          fxLayoutAlign="space-around center">
+    <button mat-fab
+            type="button"
+            (click)="onSave()"
+            [disabled]="groupName.value.length === 0">
+      <mat-icon aria-label="Save current data">done</mat-icon>
+    </button>
+    <button mat-fab
+            type="button"
+            (click)="onBack()">
+      <mat-icon aria-label="Cancel and Go back">clear</mat-icon>
+    </button>
+  </footer>
+</form>

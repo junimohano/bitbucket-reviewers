@@ -1,0 +1,10 @@
+<div fxLayout="row"
+     fxLayoutAlign="space-evenly center">
+  <label class="groups">Groups</label>
+  <button mat-mini-fab
+          (click)="onGoToDetail()">Add</button>
+</div>
+
+<app-list [list]="groups"
+          (clickItem)="onGoToDetail($event)"
+          (removeItem)="onRemoveGroup($event)"></app-list>

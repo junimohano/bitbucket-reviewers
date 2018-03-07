@@ -1,0 +1,11 @@
+<ng-container *ngIf="list">
+  <mat-list role="list"
+            *ngFor="let item of list">
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        <label (click)="clickItem.emit(item.id)">{{item.name}}</label>
+        <span (click)="removeItem.emit(item.id)">x</span>
+      </mat-list-item>
+    </mat-list>
+  </mat-list>
+</ng-container>

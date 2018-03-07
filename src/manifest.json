@@ -1,0 +1,45 @@
+{
+  "manifest_version": 2,
+  "name": "BitBucket Reviewers",
+  "description": "A tool that can help you to apply reviewers",
+  "version": "1.0",
+  "homepage_url": "https://github.com/junimohano",
+  "browser_action": {
+    "default_icon": "favicon.ico",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "*://*/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "assets/css/*",
+    "assets/js/*",
+    "assets/fonts/*"
+  ],
+  "background": {
+    "page": "/index.html?page=background"
+  },
+  "content_scripts": [{
+    "matches": [
+      "*://bitbucket.org/nymity/nymitytools/pull-requests/new",
+      "*://bitbucket.org/nymity/nymitytools/pull-requests/update/*"
+    ],
+    "js": ["scripts.bundle.js"]
+  }],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+P"
+      },
+      "description": "Save page to Pinboard"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "id": "jun.an@nymity.com"
+    }
+  }
+}
