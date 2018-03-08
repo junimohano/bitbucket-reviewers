@@ -1,88 +1,90 @@
 
-// const teamDragonMembers = ['Anna Bondar', 'Maksym Inhul', 'Liberty Chisasuro', 'Jay West'];
-// const teamNinjaMembers = ['Viktor Deyneka', 'Mark Angus'];
+const currentUserDisplayName = this.getCurrentUserDisplayName();
+const currentUserName = this.getCurrentUserName();
+const authorUserName = getAuthorUserName();
 
-// // element.insertBefore(para, child);
+browser.storage.sync.get('groups')
+  .then(
+    (items) => {
+      if (items.groups) {
+        items.groups.forEach(group => {
+          const groupButton = this.createTeamButton(group.name);
+          groupButton.addEventListener('click', () => this.clickAddTeamMembersToReviewers(group.members.map(member => member.name)));
+          this.bindTeamButtonToReviewersGroup(groupButton);
+        });
+      }
+    },
+    () => { }
+  )
+  .then(() => {
+    const resetBtn = this.createTeamButton('Reset');
+    resetBtn.addEventListener('click', () => this.clickResetTeamMembers());
+    this.bindTeamButtonToReviewersGroup(resetBtn);
+  });
 
+function bindTeamButtonToReviewersGroup(btn) {
+  const reviewersGroup = document.getElementById('id_reviewers_group');
+  reviewersGroup.appendChild(btn);
+}
 
-// // Read it using the storage API
-// chrome.storage.sync.get(['foo', 'bar'], function (items) {
+function createTeamButton(teamName) {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  const node = document.createTextNode(teamName);
+  btn.appendChild(node);
 
-//   console.log(`local loaded ${items.foo}`);
+  return btn;
+}
 
-//   // message('Settings retrieved', items);
-// });
+function clickAddTeamMembersToReviewers(listOfTeamMembers) {
+  const availableMembers = document.getElementsByClassName('aui-button aui-button-link');
 
-// // this.port.on('getElements', () => {
-// //   // Window.local
-// //   console.log(`local loaded ${localStorage.getItem('jun')}`); // console.log(`session loaded ${sessionStorage.getItem('jun2')}`);
-// // });
+  let teamMembers = Array.prototype.filter.call(availableMembers, (availableMember) =>
+    listOfTeamMembers.find(x => x === availableMember.innerHTML));
 
+  if (currentUserName === authorUserName || authorUserName === '') {
+    teamMembers = teamMembers.filter(x => x.innerHTML !== currentUserDisplayName);
+  }
 
+  if (teamMembers.length > 0) {
+    teamMembers[0].click();
+  }
 
-// const displayName = this.getDisplayName();
+  if (teamMembers.length > 1) {
+    setTimeout(() => this.clickAddTeamMembersToReviewers(listOfTeamMembers), 50);
+  }
+}
 
-// const teamDragonBtn = this.createTeamButton('Team Dragon');
-// const teamNinjaBtn = this.createTeamButton('Team Ninja');
-// const resetBtn = this.createTeamButton('Reset');
+function clickResetTeamMembers() {
+  const availableReviewers = document.getElementsByClassName('select2-search-choice-close');
+  const reviewers = Array.prototype.filter.call(availableReviewers, (availableReviewer) =>
+    availableReviewer.tagName === 'A');
 
-// teamDragonBtn.addEventListener('click', () => this.clickAddTeamMembersToReviewers(teamDragonMembers));
-// teamNinjaBtn.addEventListener('click', () => this.clickAddTeamMembersToReviewers(teamNinjaMembers));
-// resetBtn.addEventListener('click', () => this.clickResetTeamMembers());
+  if (reviewers.length > 0) {
+    reviewers[0].click();
+  }
 
-// this.bindTeamButtonToReviewersGroup(teamDragonBtn);
-// this.bindTeamButtonToReviewersGroup(teamNinjaBtn);
-// this.bindTeamButtonToReviewersGroup(resetBtn);
+  if (reviewers.length > 1) {
+    setTimeout(() => this.clickResetTeamMembers(), 50);
+  }
+}
 
-// function bindTeamButtonToReviewersGroup(btn) {
-//   const reviewersGroup = document.getElementById('id_reviewers_group');
-//   reviewersGroup.appendChild(btn);
-// }
+function getCurrentUserDisplayName() {
+  const attribute = this.getAttributeFromBody('data-current-user');
+  return attribute ? attribute.displayName : '';
+}
 
-// function createTeamButton(teamName) {
-//   const btn = document.createElement('button');
-//   btn.type = 'button';
-//   const node = document.createTextNode(teamName);
-//   btn.appendChild(node);
+function getCurrentUserName() {
+  const attribute = this.getAttributeFromBody('data-current-user');
+  return attribute ? attribute.username : '';
+}
 
-//   return btn;
-// }
+function getAuthorUserName() {
+  const attribute = this.getAttributeFromBody('data-current-pr');
+  return attribute ? attribute.author.username : '';
+}
 
-// function clickAddTeamMembersToReviewers(listOfTeamMembers) {
-//   const availableMembers = document.getElementsByClassName('aui-button aui-button-link');
-
-//   const teamMembers = Array.prototype.filter.call(availableMembers, (availableMember) =>
-//     listOfTeamMembers.find(x => x === availableMember.innerHTML && x !== this.displayName)
-//   );
-
-//   if (teamMembers.length > 0) {
-//     teamMembers[0].click();
-//   }
-
-//   if (teamMembers.length > 1) {
-//     setTimeout(() => this.clickAddTeamMembersToReviewers(listOfTeamMembers), 100);
-//   }
-// }
-
-// function clickResetTeamMembers() {
-//   const availableReviewers = document.getElementsByClassName('select2-search-choice-close');
-//   const reviewers = Array.prototype.filter.call(availableReviewers, (availableReviewer) =>
-//     availableReviewer.tagName === 'A');
-
-//   if (reviewers.length > 0) {
-//     reviewers[0].click();
-//   }
-
-//   if (reviewers.length > 1) {
-//     setTimeout(() => this.clickResetTeamMembers(), 100);
-//   }
-// }
-
-// function getDisplayName() {
-//   const metas = document.getElementsByTagName('meta');
-//   for (let i = 0; i < metas.length; i++) {
-//     return JSON.parse(metas[i].getAttribute('data-current-user')).displayName;
-//   }
-
-//   return '';
-// }
+function getAttributeFromBody(attributeName) {
+  const attribute = document.getElementsByTagName('body')[0].getAttribute(attributeName);
+  return attribute ? JSON.parse(attribute) : null;
+}
