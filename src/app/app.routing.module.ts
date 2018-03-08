@@ -17,10 +17,6 @@ const routes: Routes = [
   {
     path: 'groups',
     loadChildren: './browser-action/groups/groups.module#GroupsModule'
-  },
-  {
-    path: 'background',
-    loadChildren: './background/background.module#BackgroundModule'
   }
 ];
 
