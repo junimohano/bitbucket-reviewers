@@ -1,4 +1,9 @@
-.groups {
-  font-size: 22px;
-  font-weight: bold;
+.group-panel {
+  padding-top: 30px;
+  padding-bottom: 20px;
+  min-width: 330px;
+  .groups {
+    font-size: 22px;
+    font-weight: bold;
+  }
 }

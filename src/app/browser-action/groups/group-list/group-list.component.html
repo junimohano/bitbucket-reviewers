@@ -1,8 +1,12 @@
-<div fxLayout="row"
+<div class="group-panel"
+     fxLayout="row"
      fxLayoutAlign="space-evenly center">
-  <label class="groups">Groups</label>
+  <label class="groups">Group List</label>
   <button mat-mini-fab
-          (click)="onGoToDetail()">Add</button>
+          color="primary"
+          (click)="onGoToDetail()">
+    <mat-icon>create</mat-icon>
+  </button>
 </div>
 
 <app-list [list]="groups"

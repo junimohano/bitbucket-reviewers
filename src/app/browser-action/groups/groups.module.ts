@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 
 import { ListModule } from '../../shared/components/list';
 import { BrowserStorageModule } from '../../shared/services/browser-storage';
@@ -20,7 +21,8 @@ const materialModules = [
   MatButtonModule,
   MatInputModule,
   MatFormFieldModule,
-  MatIconModule
+  MatIconModule,
+  MatCardModule
 ];
 
 @NgModule({

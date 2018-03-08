@@ -1,11 +1,29 @@
-<ng-container *ngIf="list">
+<ng-container *ngIf="list.length > 0 else nothing">
   <mat-list role="list"
             *ngFor="let item of list">
-    <mat-list role="list">
-      <mat-list-item role="listitem">
-        <label (click)="clickItem.emit(item.id)">{{item.name}}</label>
-        <span (click)="removeItem.emit(item.id)">x</span>
-      </mat-list-item>
-    </mat-list>
+    <mat-divider></mat-divider>
+    <mat-list-item role="listitem">
+      <div fxLayout="row"
+           fxFlexFill
+           fxLayoutAlign="space-around center">
+        <label fxFlex="55"
+               (click)="clickItem.emit(item.id)">{{item.name}}</label>
+        <label fxFlex="45"
+               *ngIf="showDetail">{{item.userName}}</label>
+        <button mat-icon-button
+                (click)="removeItem.emit(item.id)">
+          <mat-icon color="warn">delete_sweep</mat-icon>
+        </button>
+      </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
   </mat-list>
 </ng-container>
+
+<ng-template #nothing>
+  <mat-list role="list">
+    <mat-list-item role="listitem">
+      <span>There is no list.</span>
+    </mat-list-item>
+  </mat-list>
+</ng-template>

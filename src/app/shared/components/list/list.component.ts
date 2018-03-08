@@ -11,7 +11,7 @@ import { ListBase } from './models/list-base.model';
 export class ListComponent implements OnInit {
 
   @Input() list: ListBase[];
-
+  @Input() showDetail = false;
   @Output() clickItem = new EventEmitter<number>();
   @Output() removeItem = new EventEmitter<number>();
 
