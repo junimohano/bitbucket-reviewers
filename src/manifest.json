@@ -24,8 +24,8 @@
   },
   "content_scripts": [{
     "matches": [
-      "*://bitbucket.org/nymity/nymitytools/pull-requests/new",
-      "*://bitbucket.org/nymity/nymitytools/pull-requests/update/*"
+      "*://bitbucket.org/*/pull-requests/new",
+      "*://bitbucket.org/*/pull-requests/update/*"
     ],
     "js": ["scripts.bundle.js"]
   }],
