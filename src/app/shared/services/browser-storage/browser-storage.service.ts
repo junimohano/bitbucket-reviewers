@@ -21,7 +21,7 @@ export class BrowserStorageService {
     return fromPromise(this.storage.remove(key));
   }
 
-  reset(key: string): Observable<any> {
+  reset(): Observable<any> {
     return fromPromise(this.storage.clear());
   }
 
