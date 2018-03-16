@@ -31,7 +31,8 @@ function createTeamButton(teamName) {
   btn.type = 'button';
   const node = document.createTextNode(teamName);
   btn.appendChild(node);
-
+  btn.className = 'button';
+  btn.style.cssText = 'margin-top: 10px; margin-right: 10px;';
   return btn;
 }
 
