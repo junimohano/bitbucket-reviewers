@@ -9,7 +9,7 @@
              maxlength="20"
              placeholder="Group Name">
       <mat-hint align="start">
-        <strong>Fill in a name of group.</strong>
+        <strong>Fill in the group name</strong>
       </mat-hint>
       <mat-hint align="end">{{groupName.value.length}} / 20</mat-hint>
     </mat-form-field>
@@ -26,7 +26,7 @@
                #memberName
                placeholder="DisplayName">
         <mat-hint align="start">
-          <strong>Same as name in bitbucket</strong>
+          <strong>Match with member name</strong>
         </mat-hint>
       </mat-form-field>
 
@@ -34,7 +34,11 @@
         <input [(ngModel)]="member.userName"
                name="member-user-name"
                matInput
+               readonly
                placeholder="UserName (optional)">
+        <mat-hint align="start">
+          <strong>Doesn't support yet</strong>
+        </mat-hint>
       </mat-form-field>
 
       <button mat-mini-fab

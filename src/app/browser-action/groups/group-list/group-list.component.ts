@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 
+import { SharedService } from '../../../shared/services/shared.service';
 import { Group } from '../models/group.model';
 import { GroupService } from './../services/group.service';
 
@@ -21,7 +22,9 @@ export class GroupListComponent implements OnInit, OnDestroy {
     private router: Router,
     private groupService: GroupService,
     private activatedRoute: ActivatedRoute,
-    private cdr: ChangeDetectorRef) {
+    private cdr: ChangeDetectorRef,
+    private sharedService: SharedService) {
+    this.sharedService.showInfoIcon.next(false);
   }
 
   ngOnInit() {

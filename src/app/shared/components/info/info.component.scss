@@ -1,0 +1,20 @@
+.icon {
+  padding: 0 14px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+::ng-deep {
+  .mat-tooltip-panel {
+    pointer-events: auto;
+    top: 0px;
+    left: 0px;
+    margin-top: 150px;
+  }
+  .mat-tooltip {
+    font-size: 14px;
+    white-space: pre-line;
+  }
+}

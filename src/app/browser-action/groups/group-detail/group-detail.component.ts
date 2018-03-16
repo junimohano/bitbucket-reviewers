@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
+import { SharedService } from '../../../shared/services/shared.service';
 import { GroupService } from '../services/group.service';
 import { Group } from './../models/group.model';
 import { Member } from './../models/member.model';
@@ -24,7 +25,9 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
     private location: Location,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private groupService: GroupService) {
+    private groupService: GroupService,
+    private sharedService: SharedService) {
+    this.sharedService.showInfoIcon.next(true);
   }
 
   ngOnInit() {

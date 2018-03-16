@@ -1,1 +1,11 @@
-<mat-toolbar color="basic">Bitbucket Reviewers</mat-toolbar>
+<mat-toolbar color="basic">
+  <mat-toolbar-row>
+    <span>Bitbucket Reviewers</span>
+    <ng-container *ngIf="showInfoIcon$ | async">
+      <span class="spacer"></span>
+      <mat-icon class="icon"
+                [matTooltip]="infoMsg"
+                matTooltipPosition="before">help_outline</mat-icon>
+    </ng-container>
+  </mat-toolbar-row>
+</mat-toolbar>

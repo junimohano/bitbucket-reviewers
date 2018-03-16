@@ -7,6 +7,7 @@
            fxFlexFill
            fxLayoutAlign="space-around center">
         <label fxFlex="55"
+               [class.click]="!showDetail"
                (click)="clickItem.emit(item.id)">{{item.name}}</label>
         <label fxFlex="45"
                *ngIf="showDetail">{{item.userName}}</label>

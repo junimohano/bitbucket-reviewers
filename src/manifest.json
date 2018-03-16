@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "BitBucket Reviewers",
-  "description": "A tool that can help you to apply reviewers",
+  "description": "A tool that helps you to add reviewers on the PR",
   "version": "1.0",
   "homepage_url": "https://github.com/junimohano",
   "browser_action": {
@@ -19,9 +19,6 @@
     "assets/js/*",
     "assets/fonts/*"
   ],
-  "background": {
-    "page": "/index.html?page=background"
-  },
   "content_scripts": [{
     "matches": [
       "*://bitbucket.org/*/pull-requests/new",
@@ -32,9 +29,9 @@
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
-        "default": "Alt+P"
+        "default": "Alt+R"
       },
-      "description": "Save page to Pinboard"
+      "description": "Open BitBucket Reviewers"
     }
   },
   "applications": {

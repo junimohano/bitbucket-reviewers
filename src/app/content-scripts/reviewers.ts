@@ -1,4 +1,3 @@
-
 const currentUserDisplayName = this.getCurrentUserDisplayName();
 const currentUserName = this.getCurrentUserName();
 const authorUserName = getAuthorUserName();
