@@ -36,7 +36,7 @@ export class GroupListComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  onGoToDetail(id: number) {
+  onGoToDetail(id?: number) {
     if (id) {
       this.router.navigate(['groups', id, 'detail']);
     } else {
